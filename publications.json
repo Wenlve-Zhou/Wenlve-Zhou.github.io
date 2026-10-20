@@ -1,0 +1,267 @@
+[
+  {
+    "id": "unitas",
+    "year": 2026,
+    "category": "embodied",
+    "world": true,
+    "title": "UNITAS: A 3D-Native World Action Model for Embodied Manipulation",
+    "authors": [
+      "Ruixiang Wang",
+      "Yongyi Su",
+      "Wenlve Zhou",
+      "Bo Yue",
+      "Hengyan Liu",
+      "Dekun Lu",
+      "Yuxin Tian",
+      "Yihan Fang",
+      "Zerui Wu",
+      "Xing Hu",
+      "Jietao Chen",
+      "Yong Guo",
+      "Ziyan He",
+      "Junbin Yuan",
+      "Guiliang Liu",
+      "Xiaofen Xing",
+      "Kui Jia"
+    ],
+    "venue": "arXiv preprint",
+    "venueShort": "Preprint",
+    "arxiv": "2610.12099",
+    "summary": "Unifying perception, actions, and scene dynamics through a shared metric 3D representation.",
+    "tags": [
+      "World models",
+      "Embodied manipulation"
+    ],
+    "paper": "https://arxiv.org/abs/2610.12099",
+    "project": "https://unitas-wam.github.io/",
+    "code": "https://github.com/DexForce/UNITAS",
+    "image": "assets/unitas.webp",
+    "imageAlt": "UNITAS overview of shared 3D action and scene representations"
+  },
+  {
+    "id": "taskanchor",
+    "year": 2026,
+    "category": "embodied",
+    "title": "TaskAnchor: Grounding Task State in Reactive VLAs for Long-Horizon Manipulation",
+    "authors": [
+      "Hengyan Liu",
+      "Wenlve Zhou",
+      "Bo Yue",
+      "Yongyi Su",
+      "Ruixiang Wang",
+      "Zhanqi Zhang",
+      "Dekun Lu",
+      "Wei Gao",
+      "Xiaofen Xing",
+      "Kui Jia"
+    ],
+    "venue": "arXiv preprint",
+    "venueShort": "Preprint",
+    "arxiv": "2609.23580",
+    "role": "Co-first author",
+    "lead": true,
+    "summary": "Grounding execution context in reactive VLAs to resolve task-state ambiguity in long-horizon manipulation.",
+    "tags": [
+      "Vision-language-action",
+      "Long-horizon manipulation"
+    ],
+    "paper": "https://arxiv.org/abs/2609.23580",
+    "project": "https://taskanchor.netlify.app/",
+    "image": "assets/taskanchor.webp",
+    "imageAlt": "TaskAnchor architecture combining task-state coordinates and historical context with a reactive VLA"
+  },
+  {
+    "id": "pmc",
+    "year": 2026,
+    "category": "vision",
+    "title": "Perturbated Model Consistency for Generalization-Enhanced Domain Adaptive Object Detection",
+    "authors": [
+      "Wenlve Zhou",
+      "Xinghao Huang",
+      "Zhiheng Zhou",
+      "Chang Niu",
+      "Weibin Wu",
+      "Xiangwei Li"
+    ],
+    "venue": "Knowledge-Based Systems",
+    "venueShort": "KBS",
+    "role": "First author",
+    "doi": "10.1016/j.knosys.2026.117031",
+    "summary": "Improving domain adaptation by encouraging consistent detections under adversarial model perturbations.",
+    "tags": [
+      "Domain adaptation",
+      "Object detection"
+    ],
+    "paper": "https://doi.org/10.1016/j.knosys.2026.117031",
+    "image": "",
+    "imageAlt": "Perturbated Model Consistency framework for domain-adaptive object detection"
+  },
+  {
+    "id": "mrm",
+    "year": 2026,
+    "category": "vision",
+    "title": "Masked Representation Modeling for Domain-Adaptive Segmentation",
+    "authors": [
+      "Wenlve Zhou",
+      "Zhiheng Zhou",
+      "Tiantao Xian",
+      "Yikui Zhai",
+      "Weibin Wu",
+      "Biyun Ma"
+    ],
+    "venue": "IEEE/CVF Conference on Computer Vision and Pattern Recognition",
+    "venueShort": "CVPR",
+    "role": "First author",
+    "arxiv": "2509.13801",
+    "summary": "Reconstructing masked semantic representations to improve adaptive segmentation without extra inference cost.",
+    "tags": [
+      "Representation learning",
+      "Semantic segmentation"
+    ],
+    "paper": "https://openaccess.thecvf.com/content/CVPR2026/papers/Zhou_Masked_Representation_Modeling_for_Domain-Adaptive_Segmentation_CVPR_2026_paper.pdf",
+    "preprint": "https://arxiv.org/abs/2509.13801",
+    "code": "https://github.com/Wenlve-Zhou/MRM",
+    "image": "assets/mrm.webp",
+    "imageAlt": "Comparison of masked representation modeling with contrastive and masked image modeling",
+    "bibtexType": "inproceedings",
+    "pages": "36999--37009"
+  },
+  {
+    "id": "physdrift",
+    "year": 2026,
+    "category": "embodied",
+    "title": "PhysDrift: Bridging the Embodiment Gap in Humanoid Co-Speech Motion Generation",
+    "authors": [
+      "Zhangzhao Liang",
+      "Xiaofen Xing",
+      "Mingyue Yang",
+      "Wenlve Zhou",
+      "Xiangmin Xu"
+    ],
+    "venue": "arXiv preprint",
+    "venueShort": "Preprint",
+    "arxiv": "2606.19935",
+    "summary": "Generating speech-aligned humanoid motion directly in robot joint space under physical constraints.",
+    "tags": [
+      "Humanoid robots",
+      "Motion generation"
+    ],
+    "paper": "https://arxiv.org/abs/2606.19935",
+    "image": "assets/physdrift.webp",
+    "imageAlt": "PhysDrift overview of robot-native co-speech motion generation"
+  },
+  {
+    "id": "dexbev",
+    "year": 2026,
+    "category": "embodied",
+    "title": "Dexterity-BEV: Aligning 3D World and Actions for Generalizable Robot Policies Learning",
+    "authors": [
+      "Huayi Zhou",
+      "Wei Gao",
+      "Dekun Lu",
+      "Ruiji Liu",
+      "Zhanqi Zhang",
+      "Ziyang Zhang",
+      "Jian Chen",
+      "Wenlve Zhou",
+      "Sheng Xu",
+      "Shumin Li",
+      "Kangyi Guo",
+      "Shichen Xu",
+      "Zixin Huang",
+      "Yongyi Su",
+      "Kui Jia"
+    ],
+    "venue": "arXiv preprint",
+    "venueShort": "Preprint",
+    "arxiv": "2606.02274",
+    "summary": "Aligning perception and robot actions in a common 3D frame for more generalizable manipulation policies.",
+    "tags": [
+      "3D perception",
+      "Robot learning"
+    ],
+    "paper": "https://arxiv.org/abs/2606.02274",
+    "project": "https://hnuzhy.github.io/projects/Dex-BEV",
+    "image": "assets/dexbev.webp",
+    "imageAlt": "Dexterity-BEV alignment of observations and actions in a common 3D frame"
+  },
+  {
+    "id": "guidance",
+    "year": 2025,
+    "category": "vision",
+    "title": "Improve Cross-Domain Mixed Sampling With Guidance Training for Adaptive Segmentation",
+    "authors": [
+      "Wenlve Zhou",
+      "Zhiheng Zhou",
+      "Tianlei Wang",
+      "Delu Zeng"
+    ],
+    "venue": "IEEE Transactions on Instrumentation and Measurement",
+    "venueShort": "TIM",
+    "role": "First author",
+    "arxiv": "2403.14995",
+    "summary": "Recovering target-domain features from cross-domain mixtures to guide adaptive semantic segmentation.",
+    "tags": [
+      "Domain adaptation",
+      "Semantic segmentation"
+    ],
+    "paper": "https://ieeexplore.ieee.org/document/10945977",
+    "preprint": "https://arxiv.org/abs/2403.14995",
+    "image": "assets/guidance.webp",
+    "imageAlt": "Guidance Training framework for cross-domain mixed sampling in semantic segmentation"
+  },
+  {
+    "id": "bipc",
+    "year": 2025,
+    "category": "vision",
+    "title": "BiPC: Bidirectional Probability Calibration for Unsupervised Domain Adaption",
+    "authors": [
+      "Wenlve Zhou",
+      "Zhiheng Zhou",
+      "Junyuan Shang",
+      "Chang Niu",
+      "Mingyue Zhang",
+      "Xiyuan Tao",
+      "Tianlei Wang"
+    ],
+    "venue": "Expert Systems with Applications",
+    "venueShort": "ESWA",
+    "role": "First author",
+    "doi": "10.1016/j.eswa.2024.125460",
+    "arxiv": "2409.19542",
+    "summary": "Using pretrained and task-specific heads to calibrate each other across domain shifts.",
+    "tags": [
+      "Domain adaptation",
+      "Probability calibration"
+    ],
+    "paper": "https://doi.org/10.1016/j.eswa.2024.125460",
+    "preprint": "https://arxiv.org/abs/2409.19542",
+    "code": "https://github.com/Wenlve-Zhou/BiPC",
+    "image": "assets/bipc.webp",
+    "imageAlt": "Bidirectional Probability Calibration method overview"
+  },
+  {
+    "id": "vlp",
+    "year": 2024,
+    "category": "vision",
+    "title": "Unsupervised Domain Adaption Harnessing Vision-Language Pre-training",
+    "authors": [
+      "Wenlve Zhou",
+      "Zhiheng Zhou"
+    ],
+    "venue": "IEEE Transactions on Circuits and Systems for Video Technology",
+    "venueShort": "TCSVT",
+    "role": "First author",
+    "arxiv": "2408.02192",
+    "summary": "Transferring vision-language knowledge through cross-modal distillation and residual sparse training.",
+    "tags": [
+      "Vision-language learning",
+      "Domain adaptation"
+    ],
+    "paper": "https://ieeexplore.ieee.org/document/10505301",
+    "preprint": "https://arxiv.org/abs/2408.02192",
+    "code": "https://github.com/Wenlve-Zhou/VLP-UDA",
+    "image": "assets/vlp.webp",
+    "imageAlt": "Vision-language pretraining for unsupervised domain adaptation overview"
+  }
+]

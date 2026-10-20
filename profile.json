@@ -1,0 +1,31 @@
+{
+  "name": "Wenlve Zhou",
+  "role": "Lecturer",
+  "credential": "Ph.D.",
+  "department": "School of Computer Science and Artificial Intelligence",
+  "email": "zhouwenlue@fosu.edu.cn",
+  "university": {
+    "name": "Foshan University",
+    "url": "https://www.fosu.edu.cn/"
+  },
+  "education": {
+    "degree": "Ph.D.",
+    "university": "South China University of Technology",
+    "url": "https://www.scut.edu.cn/",
+    "abbreviation": "SCUT"
+  },
+  "scholar": "https://scholar.google.com/citations?user=DckM_OIAAAAJ&hl=en",
+  "github": "https://github.com/Wenlve-Zhou",
+  "portrait": "assets/wenlve-zhou.jpg",
+  "siteUrl": "https://wenlve-zhou.github.io",
+  "interests": [
+    {"label": "Computer vision", "icon": "eye"},
+    {"label": "Embodied intelligence", "icon": "robot"},
+    {"label": "Representation learning", "icon": "layers"},
+    {"label": "World models", "icon": "box"}
+  ],
+  "researchStatement": "My work explores domain adaptation and robust visual representations, alongside perception and action modeling for embodied systems.",
+  "extraBiography": [],
+  "additionalExperience": [],
+  "contactText": "For research-related inquiries, please reach me by email."
+}

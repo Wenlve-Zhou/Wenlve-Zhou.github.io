@@ -1,0 +1,79 @@
+[
+  {
+    "id": "mrm",
+    "size": [
+      873,
+      863
+    ],
+    "bytes": 64452,
+    "source": "https://arxiv.org/html/2509.13801v2/fig1.png"
+  },
+  {
+    "id": "guidance",
+    "size": [
+      1352,
+      630
+    ],
+    "bytes": 72880,
+    "source": "https://arxiv.org/html/2403.14995v1/Fig2.png"
+  },
+  {
+    "id": "taskanchor",
+    "size": [
+      1596,
+      644
+    ],
+    "bytes": 56270,
+    "source": "https://taskanchor.netlify.app/assets/images/architecture-20260926.webp"
+  },
+  {
+    "id": "unitas",
+    "size": [
+      2400,
+      1251
+    ],
+    "bytes": 108768,
+    "source": "https://raw.githubusercontent.com/DexForce/UNITAS/main/assets/overview.png"
+  },
+  {
+    "id": "physdrift",
+    "size": [
+      4094,
+      2213
+    ],
+    "bytes": 111198,
+    "source": "https://arxiv.org/html/2606.19935v1/1.jpg"
+  },
+  {
+    "id": "dexbev",
+    "size": [
+      2640,
+      1508
+    ],
+    "bytes": 117432,
+    "source": "https://hnuzhy.github.io/projects/Dex-BEV/img/fig1-teaser.jpg"
+  },
+  {
+    "id": "vlp",
+    "size": [
+      5325,
+      3281
+    ],
+    "bytes": 74038,
+    "source": "https://raw.githubusercontent.com/Wenlve-Zhou/VLP-UDA/main/resources/overview.jpg"
+  },
+  {
+    "id": "bipc",
+    "size": [
+      11931,
+      6863
+    ],
+    "bytes": 60922,
+    "source": "https://raw.githubusercontent.com/Wenlve-Zhou/BiPC/master/resources/Methods.jpg"
+  },
+  {
+    "id": "pmc",
+    "type": "Typographic cover",
+    "source": "https://doi.org/10.1016/j.knosys.2026.117031"
+  }
+]
