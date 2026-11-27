@@ -172,8 +172,8 @@
       "Yongyi Su",
       "Kui Jia"
     ],
-    "venue": "arXiv preprint",
-    "venueShort": "Preprint",
+    "venue": "Conference on Robot Learning",
+    "venueShort": "CORL",
     "arxiv": "2606.02274",
     "summary": "Aligning perception and robot actions in a common 3D frame for more generalizable manipulation policies.",
     "tags": [
