@@ -4,10 +4,9 @@
   const articles = [...document.querySelectorAll('.publication')];
   const groups = [...document.querySelectorAll('.year-group')];
   const filters = [...document.querySelectorAll('.filter')];
-  const count = document.querySelector('#paper-count');
   const filterStatus = document.querySelector('#filter-status');
 
-  function applyFilter(value, announce = true) {
+  function applyFilter(value) {
     let visible = 0;
     articles.forEach(article => {
       const show = value === 'all' || article.dataset.category === value || (value === 'world' && article.dataset.world === 'true');
@@ -16,8 +15,7 @@
     });
     groups.forEach(group => { group.hidden = !group.querySelector('.publication:not([hidden])'); });
     filters.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === value)));
-    count.textContent = visible;
-    if (announce) filterStatus.textContent = `${visible} publication${visible === 1 ? '' : 's'} shown.`;
+    filterStatus.textContent = `${visible} publication${visible === 1 ? '' : 's'}`;
   }
   filters.forEach(button => button.addEventListener('click', () => applyFilter(button.dataset.filter)));
 
@@ -25,24 +23,29 @@
   function revealHashTarget() {
     if (location.hash.startsWith('#paper-')) {
       const article = document.getElementById(location.hash.slice(1));
-      if (article && article.hidden) applyFilter('all', false);
+      if (article && article.hidden) applyFilter('all');
       if (article) requestAnimationFrame(() => article.scrollIntoView({block:'start'}));
     }
   }
   window.addEventListener('hashchange', revealHashTarget);
   document.querySelectorAll('a[href^="#paper-"]').forEach(anchor => anchor.addEventListener('click', () => {
     const article = document.getElementById(anchor.hash.slice(1));
-    if (article && article.hidden) applyFilter('all', false);
+    if (article && article.hidden) applyFilter('all');
     if (article) requestAnimationFrame(() => article.scrollIntoView({block:'start'}));
   }));
   revealHashTarget();
 
-  const nav = [...document.querySelectorAll('.side-nav a')];
+  const nav = [...document.querySelectorAll('.site-nav a')];
+  const header = document.querySelector('.site-header');
   const sections = [...document.querySelectorAll('main > section')];
   function updateCurrentSection() {
+    const readingLine = header.getBoundingClientRect().bottom + 26;
     let current = sections[0];
-    sections.forEach(section => { if (section.getBoundingClientRect().top <= 150) current = section; });
-    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 35) current = sections[sections.length - 1];
+    sections.forEach(section => { if (section.getBoundingClientRect().top <= readingLine) current = section; });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+      const destination = sections.find(section => location.hash === `#${section.id}` && section.getBoundingClientRect().top >= readingLine);
+      current = destination || sections[sections.length - 1];
+    }
     nav.forEach(a => {
       if (a.hash === `#${current.id}`) a.setAttribute('aria-current', 'location');
       else a.removeAttribute('aria-current');
@@ -55,6 +58,8 @@
       requestAnimationFrame(() => { updateCurrentSection(); scheduled = false; });
     }
   }, {passive:true});
+  window.addEventListener('hashchange', updateCurrentSection);
+  window.addEventListener('resize', updateCurrentSection);
   updateCurrentSection();
 
   const citationDialog = document.querySelector('#citation-dialog');
