@@ -69,8 +69,9 @@ def bibtex(p):
 
 def paper_html(p):
     authors = ', '.join(f'<strong>{e(profile["name"])}</strong>' if a == profile['name'] else e(a) for a in p['authors'])
-    venue_cls = ' is-cvpr' if p['venueShort'] == 'CVPR' else ''
-    role = f'<span class="role">{e(p["role"])}</span>' if p.get('role') else ''
+    author_role = p.get('role')
+    role_class = 'role author-role' if author_role in ('First author', 'Co-first author') else 'role'
+    role = f'<span class="{role_class}">{e(author_role)}</span>' if author_role else ''
     lead = '<span class="lead-role">Project lead</span>' if p.get('lead') else ''
     links = [link(p['paper'], icon('paper') + 'Paper', f'aria-label="Read {e(p["title"], quote=True)}"')]
     for key, label, sym in [('preprint','arXiv','external'),('project','Project','globe'),('code','Code','code')]:
@@ -83,11 +84,10 @@ def paper_html(p):
         cover_name = p.get('shortTitle') or (p['id'].upper() if len(p['id']) <= 6 else 'PAPER')
         cover_topic = '<br>'.join(e(tag) for tag in p.get('tags', [])[:2])
         teaser = f'<a class="teaser paper-cover" href="{e(p["paper"], quote=True)}" target="_blank" rel="noopener noreferrer" aria-label="Read {e(p["title"], quote=True)}"><span class="cover-journal">{e(p["venue"].upper())}</span><span class="cover-abbreviation">{e(cover_name)}</span><span class="cover-topic">{cover_topic}</span><span class="cover-year">{p["year"]} {icon("external")}</span></a>'
-    lead_class = ' lead-publication' if p.get('lead') else ''
-    return f'''<article class="publication{lead_class}" id="paper-{p['id']}" data-category="{p['category']}" data-world="{str(p.get('world', False)).lower()}">
+    return f'''<article class="publication" id="paper-{p['id']}" data-category="{p['category']}" data-world="{str(p.get('world', False)).lower()}">
       {teaser}
       <div class="paper-content">
-        <div class="paper-meta"><span class="venue{venue_cls}" title="{e(p['venue'], quote=True)}">{e(p['venueShort'])} {p['year']}</span>{role}{lead}</div>
+        <div class="paper-meta"><span class="venue" title="{e(p['venue'], quote=True)}">{e(p['venueShort'])} {p['year']}</span>{role}{lead}</div>
         <h4 class="paper-title">{link(p['paper'], e(p['title']))}</h4>
         <p class="authors">{authors}</p>
         <p class="paper-summary">{e(p['summary'])}</p>
@@ -107,11 +107,6 @@ symbols = '''
 <symbol id="i-external" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></symbol>
 <symbol id="i-paper" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8m-8 4h5"/></symbol>
 <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c5 5 5 13 0 18-5-5-5-13 0-18Z"/></symbol>
-<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
-<symbol id="i-robot" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="13" rx="3"/><path d="M12 3v4M9 16h6M1 12v4m22-4v4M8 11v1m8-1v1"/><circle cx="12" cy="2" r="1"/></symbol>
-<symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 10 5-10 5L2 8l10-5Zm-10 9 10 5 10-5M2 16l10 5 10-5"/></symbol>
-<symbol id="i-box" viewBox="0 0 24 24"><path d="m12 2 10 5v10l-10 5-10-5V7l10-5Zm0 10 10-5M12 12 2 7m10 5v10M7 4.5l10 5"/></symbol>
-<symbol id="i-update" viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 2.5 7M3 4v7h7M12 7v5l3 2"/></symbol>
 <symbol id="i-quote" viewBox="0 0 24 24"><path d="M3 12h6v7H3v-7Zm0 0c0-5 2-7 5-7m7 7h6v7h-6v-7Zm0 0c0-5 2-7 5-7"/></symbol>
 <symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol>
 <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
@@ -136,8 +131,6 @@ about_html = (
     + f'<p>My research spans {joined_interests}. {e(profile["researchStatement"])}</p>'
     + ''.join(f'<p>{e(paragraph)}</p>' for paragraph in profile.get('extraBiography', []))
 )
-interests_html = ''.join(f'<span class="interest">{icon(item["icon"])}{e(item["label"])}</span>' for item in profile['interests'])
-rail_focus = '<br>'.join(e(item['label']) for item in profile['interests'][:2])
 news_parts = []
 for item in sorted(news, key=lambda x: x['date'], reverse=True):
     if not re.fullmatch(r'\d{4}-(0[1-9]|1[0-2])', item['date']):
@@ -175,7 +168,7 @@ html = f'''<!doctype html>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{e(profile["name"])} | {e(profile["role"])} at {e(university["name"])}</title>
   <meta name="description" content="{e(site_description, quote=True)}">
-  <meta name="theme-color" content="#142a3d">
+  <meta name="theme-color" content="#ffffff">
   <meta property="og:type" content="profile"><meta property="og:title" content="{e(profile["name"], quote=True)} — Academic Homepage">
   <meta property="og:description" content="{e(" · ".join(interest_names), quote=True)}">
   <meta property="og:url" content="{ORIGIN}"><meta property="og:image" content="{ORIGIN}/{e(profile["portrait"], quote=True)}">
@@ -185,63 +178,72 @@ html = f'''<!doctype html>
   <script>document.documentElement.classList.remove('no-js');</script>
   <script src="app.js?v={sha256((DIST / 'app.js').read_bytes()).hexdigest()[:12]}" defer></script>
 </head>
-<body id="top">
+<body>
+<div class="homepage" id="top">
 {symbols}
 <a class="skip-link" href="#main-content">Skip to content</a>
-<aside class="sidebar" aria-label="Profile and navigation">
-  <div class="site-label"><span class="site-mark">wz.</span> Academic homepage</div>
-  <div class="profile">
-    <div class="portrait-frame"><img class="portrait" src="{e(profile["portrait"], quote=True)}" alt="Portrait of {e(profile["name"], quote=True)}" width="156" height="196" fetchpriority="high"></div>
-    <h1>{e(profile["name"])}</h1><p class="position"><span class="position-mark" aria-hidden="true"></span>{e(profile["role"])} · {e(profile["credential"])}</p>
-    <p class="affiliation">{link(university['url'], e(university['name']))}<br>{e(profile['department'])}</p>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-name" href="#top">{e(profile["name"])}</a>
+    <nav class="site-nav" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#updates">News</a>
+      <a href="#publications">Publications</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </div>
-  <div class="profile-links">
-    <a href="mailto:{e(profile["email"], quote=True)}" class="email">{icon('mail')}{e(profile["email"])}</a>
-    {link(SCHOLAR,icon('scholar')+'Google Scholar')}
-    {link(profile['github'],icon('github')+'GitHub')}
-  </div>
-  <nav class="side-nav" aria-label="Sections">
-    <a href="#about" aria-current="location"><span>01</span>About</a>
-    <a href="#updates"><span>02</span>Updates</a>
-    <a href="#publications"><span>03</span>Publications</a>
-    <a href="#experience"><span>04</span>Experience</a>
-    <a href="#contact"><span>05</span>Contact</a>
-  </nav>
-  <div class="rail-footer"><span>Research profile</span>{rail_focus}</div>
-</aside>
-<div class="main-shell">
-  <header class="topbar"><div class="breadcrumb">{e(profile["name"])} <span class="slash">/</span><strong>Academic homepage</strong></div><a href="mailto:{e(profile["email"], quote=True)}">Get in touch {icon('external')}</a></header>
-  <main id="main-content">
+</header>
+<div class="site-layout">
+  <aside class="sidebar" aria-label="Profile">
+    <div class="profile">
+      <img class="portrait" src="{e(profile["portrait"], quote=True)}" alt="Portrait of {e(profile["name"], quote=True)}" width="152" height="152" fetchpriority="high">
+      <h1>{e(profile["name"])}</h1>
+      <p class="position">{e(profile["role"])} · {e(profile["credential"])}</p>
+      <p class="affiliation">{link(university['url'], e(university['name']))}<br>{e(profile['department'])}</p>
+    </div>
+    <div class="profile-links">
+      <a href="mailto:{e(profile["email"], quote=True)}">{icon('mail')}{e(profile["email"])}</a>
+      {link(SCHOLAR, icon('scholar') + 'Google Scholar')}
+      {link(profile['github'], icon('github') + 'GitHub')}
+    </div>
+  </aside>
+  <main id="main-content" tabindex="-1">
     <section id="about" aria-labelledby="about-title">
-      <p class="section-kicker">Profile &amp; research</p>
-      <h2 id="about-title">About me</h2>
+      <h2 id="about-title">About Me</h2>
       <div class="about-body">{about_html}</div>
-      <div class="interests" aria-label="Research interests">{interests_html}</div>
     </section>
     <section id="updates" class="updates" aria-labelledby="updates-title">
-      <div class="updates-heading"><h2 id="updates-title">{icon('update')}Recent updates</h2></div>
+      <h2 id="updates-title">News</h2>
       <ul class="news-list">{news_html}</ul>
     </section>
     <section id="publications" class="publications" aria-labelledby="publications-title">
-      <p class="section-kicker">Research &amp; publications</p>
-      <div class="section-heading"><h2 id="publications-title">Selected publications <span class="count-badge" id="paper-count">{paper_count}</span></h2>{link(SCHOLAR,'<span class="long-label">Full list on </span>Google Scholar'+icon('external'),'class="scholar-link"')}</div>
-      <p class="publication-note">My name is underlined. Author contributions are noted where applicable.</p>
+      <h2 id="publications-title">Selected Publications</h2>
+      <p class="publication-note">My name is underlined. Badges mark my first-author and co-first-author papers.</p>
       <div class="filters" role="group" aria-label="Filter publications by research area">
         <button type="button" class="filter" data-filter="all" aria-pressed="true">All <span>{paper_count}</span></button>
         <button type="button" class="filter" data-filter="embodied" aria-pressed="false">Embodied intelligence <span>{counts['embodied']}</span></button>
         <button type="button" class="filter" data-filter="vision" aria-pressed="false">Computer vision <span>{counts['vision']}</span></button>
         <button type="button" class="filter" data-filter="world" aria-pressed="false">World models <span>{counts['world']}</span></button>
       </div>
-      <div class="visually-hidden" id="filter-status" role="status" aria-live="polite"></div>
+      <div class="publication-toolbar">
+        <p id="filter-status" role="status">{paper_count} publication{'s' if paper_count != 1 else ''}</p>
+        {link(SCHOLAR, 'Full list on Google Scholar', 'class="scholar-link"')}
+      </div>
       <div id="publication-list">{publication_html}</div>
     </section>
     <section id="experience" class="experience" aria-labelledby="experience-title">
-      <p class="section-kicker">Academic journey</p><h2 id="experience-title">Experience &amp; education</h2>
+      <h2 id="experience-title">Experience &amp; Education</h2>
       <ol class="experience-list">{experience_html}</ol>
     </section>
-    <section id="contact" class="contact-section" aria-labelledby="contact-title"><div><h2 id="contact-title">Get in touch</h2><p>{e(profile["contactText"])}</p></div><a class="contact-button" href="mailto:{e(profile["email"], quote=True)}">{icon('mail')}{e(profile["email"])} {icon('external')}</a></section>
+    <section id="contact" class="contact-section" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <p>{e(profile["contactText"])}</p>
+      <a class="contact-link" href="mailto:{e(profile["email"], quote=True)}">{icon('mail')}{e(profile["email"])}</a>
+    </section>
   </main>
-  <footer class="footer"><div>© {LAST_UPDATED.year} {e(profile["name"])} <span class="footer-update">· Updated {LAST_UPDATED.strftime('%B %Y')}</span></div><a href="#top">Back to top {icon('up')}</a></footer>
+  <footer class="footer"><div>© {LAST_UPDATED.year} {e(profile["name"])} <span>· Updated {LAST_UPDATED.strftime('%B %Y')}</span></div><a href="#top">Back to top {icon('up')}</a></footer>
+</div>
 </div>
 <dialog id="citation-dialog" aria-labelledby="citation-heading"><div class="dialog-heading"><h2 id="citation-heading">Cite this work</h2><button type="button" class="dialog-close" data-close aria-label="Close citation">{icon('close')}</button></div><p class="citation-title" id="citation-title"></p><pre id="citation-code" tabindex="0"></pre><div class="dialog-actions"><button type="button" id="copy-citation">Copy BibTeX</button><a id="download-citation" download>Download .bib</a><span class="copy-status" id="copy-status" role="status" aria-live="polite"></span></div></dialog>
 <dialog id="image-dialog" class="image-dialog" aria-labelledby="image-heading"><div class="dialog-heading"><h2 id="image-heading"></h2><button type="button" class="dialog-close" data-close aria-label="Close figure">{icon('close')}</button></div><img id="full-figure" alt=""><p class="image-source">Figure from the original research paper or project.</p></dialog>
